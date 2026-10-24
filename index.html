@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Навчальні матеріали" />
+
+    <link rel="icon" type="image/svg+xml" href="./media/icons/carambola.svg" />
+
+    <title>Exam Notes</title>
+
+    <script>
+      const savedTheme = localStorage.getItem("lms_theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+
+      const hljsThemeLink =
+        savedTheme === "dark"
+          ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+          : "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
+
+      document.head.insertAdjacentHTML(
+        "beforeend",
+        `<link id="hljs-theme" rel="stylesheet" href="${hljsThemeLink}" />`,
+      );
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Fira+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Tektur:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css"
+    />
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"
+    ></script>
+
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/xml/xml.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/css/css.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/htmlmixed/htmlmixed.min.js"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css"
+    />
+
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/python/python.min.js"
+    ></script>
+
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"
+    ></script>
+
+    <link rel="stylesheet" href="./style.css?v=1.0" />
+    <script src="./script.js?v=1.0" defer></script>
+
+    <style>
+      h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+      details.answer div {
+        border: 2px solid rgb(83, 193, 131);
+        border-radius: 6px;
+        padding: 0 15px;
+        background-color: rgb(245, 254, 245);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- transition curtain -->
+    <div class="transition-curtain"></div>
+
+    <!-- top-bar -->
+    <div id="nav-container">
+      <nav class="top-bar">
+        <div class="logo-container">
+          <img
+            src="../media/icons/carambola.svg"
+            alt="Logo"
+            class="site-logo"
+          />
+        </div>
+
+        <div class="top-bar__controls">
+          <label class="toggle-switch" aria-label="Перемикач теми">
+            <input type="checkbox" id="theme-checkbox" />
+            <span class="slider">
+              <span class="icon sun"
+                ><img src="../media/icons/stars.svg"
+              /></span>
+              <span class="icon moon"
+                ><img src="../media/icons/moon.svg"
+              /></span>
+            </span>
+          </label>
+          <button
+            id="dyslexia-mode-btn"
+            class="wide-toggle"
+            title="Шрифт для дислектиків"
+          >
+            Aa
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- lesson header -->
+    <header>
+      <div class="title-container">
+        <h1 id="lesson-title">Exam Notes</h1>
+      </div>
+
+      <hr class="pretty-divider" />
+    </header>
+
+    <!-- lesson content -->
+    <main>
+      <!-- tab buttons -->
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-target="part-1">1-10</button>
+        <button class="tab-btn" data-target="part-2">11-20</button>
+        <button class="tab-btn" data-target="part-3">21-30</button>
+        <button class="tab-btn" data-target="part-4">31-40</button>
+      </div>
+
+      <!-- 🍋 PART 1: 1-10 -->
+      <section id="part-1" class="lesson-wrapper tab-content active show">
+        <div class="lesson-block">
+          <div class="lesson-header">
+            <h2>
+              <img
+                src="../media/icons/lemon.svg"
+                class="star"
+                alt="lemon"
+                width="60"
+                height="60"
+              />
+              <span>Питання 1-10</span>
+            </h2>
+          </div>
+
+          <div class="lesson-content">
+            <!-- 1 -->
+            <h3 id="q-1">П1</h3>
+            <details class="answer" name="p1">
+              <summary>
+                Процес. Випадковий процес. Основні поняття теорії випадкових
+                процесів.
+              </summary>
+              <div>
+                <p>
+                  ⭐️ Процес – це зміна величин зі зміною часу або інших
+                  параметрів.
+                </p>
+
+                <p>
+                  ⭐️ Випадковий процес – це множина випадкових величин, як
+                  залежать від одного чи більше параметрів. Формально це
+                  випадкова змінна xi(t) яка змінюється залежно від
+                  невипадкового аргумента t є T, де t часто інтерпретують як
+                  час.
+                </p>
+
+                <p>
+                  ⭐️ Основні поняття: перетин, експеримент, реалізація. Перетин
+                  випадкового процесу xi – це його значення при фіксованому
+                  значенні t. Експеримент над ВП – це коли аргумент t послідовно
+                  набуває всіх значень зі своєї області визначення T. Якщо
+                  аргумент послідовно приймає всі значення з T, по всі
+                  відповідні вип. змінні теж приймають певні значення і це
+                  породжує реалізацію ВП – конкретну невипадкову функцію x(t).
+                </p>
+              </div>
+            </details>
+
+            <hr />
+
+            <!-- 2 -->
+            <h3 id="q-2">П2</h3>
+            <details class="answer" name="p1">
+              <summary>Класифікація ВП. Скінченновимірні розподіли ВП.</summary>
+              <div>
+                <p>
+                  🍀 ВП можна поділити на 4 основні класи залежно від структури
+                  множини вип. змінних і множини значень аргумента t:
+                </p>
+                <ol>
+                  <li>з дискретними станами і дискретним часом</li>
+                  <li>з неперервними станами станами і дискретним часом</li>
+                  <li>з дискретними станами станами і неперервним часом</li>
+                  <li>з неперервними станами станами і неперервним часом</li>
+                </ol>
+                <p>
+                  🍀 Дискретні стани, це коли множина станів системи, в якій
+                  відбувається ВП в будь-який момент часу зчисленна, а
+                  неперервні – коли незчисленна. ВП з дискретним часом якщо
+                  система може змінювати свої стани лише в моменти t_1, t_2,
+                  ..., t_n, або а з неперервним - якщо вона може змінювати свою
+                  стани в будь-який момент часу t.
+                </p>
+
+                <p>
+                  🍰 Скінченновимірний розподіл ВП - це сумісний розподіл
+                  випадкових змінних xi(t_i). Ці змінні отримуються, якщо взяти
+                  деякі фіксовані значення t_i, i=1,...,n.
+                </p>
+                <p>
+                  🍰 Розподіл показує ймовірність, що вип. величина прийме якесь
+                  значення, а сумісний розподіл – що кілька величин одночасно
+                  приймуть певні значення. Закон розподілу зазвичай залежить від
+                  часу, тому його можна задати густиною розподілу ймовірностей.
+                </p>
+                <p>🍰 n-вимірний закон розподілу:</p>
+                <img src="./images/n_вимірний_закон_розподілу.png" />
+                <p>
+                  🍰 Як із двовимірної густини розподілу ймовірностей отримати
+                  одновимірну:
+                </p>
+                <img src="./images/густина.png" />
+              </div>
+            </details>
+
+            <hr />
+
+            <!-- 3 -->
+            <h3 id="q-3">П3</h3>
+            <details class="answer" name="p1">
+              <summary>
+                Мат. сподівання та дисперсія ВП. Їх властивості.
+              </summary>
+              <div>
+                <p>
+                  🥝 Мат. сподівання ПВ xi(t) - це ф-я E_xi(t), яка при кожному
+                  t є T приймає значення мат. сподівання відповідного перетину
+                  цього процесу E(xi(t)). Вона є деякою середньою реалізацією
+                  даного процесу і на її графіку зображена сукупність центрів
+                  мас всіх можливих його перетинів.
+                </p>
+                <p>
+                  🥝 Мат. сподівання ВП - невипадкова функція, яка повністю
+                  визначається одновимірни законом розподілу цього ВП. Якщо
+                  перетини ВП - дискретні вип. змінні, то залежно від того, чи
+                  залежать вип. змінні від часу чи ні, мат. сподівання можна
+                  подати відповідно як суму x_i(t) * p_i(t) або суму x_i *
+                  p_i(t), де x_i - i-й перетин.
+                </p>
+
+                <p>
+                  🍁 Дисперсія ПВ xi(t) - це ф-я D_xi(t), яка при кожному t є T
+                  приймає значення дисперсії відповідного перетину цього процесу
+                  D(xi(t)). Вона характеризує ступінь розсіяння можливих
+                  реалізацій цього ВП навколо його мат. сподівання. Вона теж
+                  повністю визначається його одновимірним законом розподілу.
+                </p>
+                <p>
+                  🍁 Дисперсія вимірюється в квадратних одиницях. Це часто не
+                  узгоджується з одиницями вимірювання перетинів процесу, тому
+                  за міру розсіяння ВП навколо його мат. сподівання часто беруть
+                  середнє квадратичне відхилення цієї ф-ї, яке обчислюється як
+                  корінь з дисперсії.
+                </p>
+                <p>🍁 Властивості дисперсії ВП:</p>
+                <ul>
+                  <li>це невідʼємнозначна функція</li>
+                  <li>дисперсія невипадкової функції = 0</li>
+                  <li>
+                    додавання невип. ф-ї до ВП не змінює дисперсії цього ВП
+                  </li>
+                  <li>
+                    якщо множником є невипадкова функція, то можна піднести її
+                    до квадрату і винести за знак дисперсії
+                  </li>
+                  <li>
+                    якщо при всіх значеннях t перетини двох ВП є незалежними
+                    вип. змінними, дисперсія суми цих процесів = сумі їх
+                    дисперсій
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <hr />
+
+            <!-- 4 -->
+            <h3 id="q-4">П4</h3>
+            <details class="answer" name="p1">
+              <summary>
+                Кореляційна функція ВП. Нормована КФ ВП. Взаємна КФ та нормована
+                взаємна КФ двох ВП. Властивості.
+              </summary>
+              <div>
+                <p>
+                  🥑 Кореляційна функція випадкового процесу K(t_1, t_2)
+                  характеризує ступінь залежності між різними перетинами цього
+                  ВП, які відповідають різним значенням його аргументу t. Вона
+                  потрібна, бо мат. сподівання і дисперсія не визначають
+                  однозначно випадкову змінну, а ВП є сукупністю вип. змінних,
+                  що повʼязані спільним параметром.
+                </p>
+
+                <img src="./images/кор_ф.png" />
+
+                <p>
+                  🥑 Звичайна кореляційна функція ВП K(t_1, t_2) вимірюється в
+                  квадратних одиницях і залежить від масштабу чисел, тому за нею
+                  неможливо одразу сказати, сильний зв'язок між станами процесу
+                  чи слабкий. Нормована кореляційна функція rho_xi(t_1, t_2)
+                  потрібна для того, щоб перевести цей зв'язок в універсальну
+                  безрозмірну шкалу від -1 до 1. Вона показує "чистий" ступінь
+                  лінійної залежності між станами процесу в моменти t_1 і t_2.
+                </p>
+
+                <img src="./images/норм_кор_ф.png" />
+                <img src="./images/скв.png" />
+                <img src="./images/норм_к_ф_2.png" />
+
+                <p>
+                  🌈 Іноді кілька випадкових процесів можуть відбуватися
+                  одночасно і бути залежними один від одного. Тоді залежність
+                  цих ВП оцінюють на основі залежності їхніх перетинів і ступінь
+                  цієї залежності визначають за доп. взаємної пореляційної
+                  функції. Процеси незалежні, якщо ця функція рівна нулю, і
+                  залежні в іншому випадку. І вона теж вимірюється в квадратних
+                  одиницях, тому існує нормована взаємна кореляційна функція.
+                </p>
+
+                <img src="./images/норм_взаємна_к_ф.png" />
+              </div>
+            </details>
+
+            <hr />
+
+            <!-- 5 -->
+            <h3 id="q-5">П5</h3>
+            <details class="answer" name="p1">
+              <summary>
+                Знаходження реалізацій ВП та його графічне зображення.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 6 -->
+            <h3 id="q-6">П6</h3>
+            <details class="answer" name="p1">
+              <summary>
+                Експериментальне визначення числових характеристик ВП.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 7 -->
+            <h3 id="q-7">П7</h3>
+            <details class="answer" name="p1">
+              <summary>Алгоритми виявлення тренду часового ряду.</summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 8 -->
+            <h3 id="q-8">П8</h3>
+            <details class="answer" name="p1">
+              <summary>Згладжування ЧР та побудова його тренду.</summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 9 -->
+            <h3 id="q-9">П9</h3>
+            <details class="answer" name="p1">
+              <summary>Основні класи ВП.</summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 10 -->
+            <h3 id="q-10">П10</h3>
+            <details class="answer" name="p1">
+              <summary>Перетворення ВП.</summary>
+              <div></div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- 🍊 PART 2: 11-20 -->
+      <section id="part-2" class="lesson-wrapper tab-content">
+        <div class="lesson-block">
+          <div class="lesson-header">
+            <h2>
+              <img
+                src="./media/icons/orange.svg"
+                class="star"
+                alt="orange"
+                width="60"
+                height="60"
+              />
+              <span>Питання 11-20</span>
+            </h2>
+          </div>
+
+          <div class="lesson-content">
+            <!-- 11 -->
+            <h3 id="q-11">П11</h3>
+            <details class="answer" name="p2">
+              <summary>Числові характеристики суми ВП.</summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 12 -->
+            <h3 id="q-12">П12</h3>
+            <details class="answer" name="p2">
+              <summary>
+                Теорема про мат. сподівання та кореляційну ф-ю границі в
+                середньому квадратичному послідовності вип. процесів.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 13 -->
+            <h3 id="q-13">П13</h3>
+            <details class="answer" name="p2">
+              <summary>
+                Теорема про збіжність в середньому квадратичному послідовності
+                центрованих вип. процесів та послідовності мат. сподівань.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 14 -->
+            <h3 id="q-14">П14</h3>
+            <details class="answer" name="p2">
+              <summary>
+                Теорема про кореляційну ф-ю границі в сер. кв.послідовності вип.
+                процесів. (ч. 2 п12)
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 15 -->
+            <h3 id="q-15">П15</h3>
+            <details class="answer" name="p2">
+              <summary>
+                Теорема про мат. сподівання та кореляційну ф-ю похідної ВП.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 16 -->
+            <h3 id="q-16">П16</h3>
+            <details class="answer" name="p2">
+              <summary>
+                Необхідна і достатня умова існування похідної ВП.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 17 -->
+            <h3 id="q-17">П17</h3>
+            <details class="answer" name="p2">
+              <summary>
+                Теорема про існування мат. сподівання і кореляційної ф-ї
+                інтеграла від ВП.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 18 -->
+            <h3 id="q-18">П18</h3>
+            <details class="answer" name="p2">
+              <summary>
+                Необхідна і достатня умова існування інтеграла віт мат.
+                сподівання і кореляційної ф-ї ВП.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 19 -->
+            <h3 id="q-9">П19</h3>
+            <details class="answer" name="p2">
+              <summary>
+                Необхідна і достатня умова прямування до нуля середнього
+                значення кор. ф-ї ВП при необмеженому розширенні інтервалу
+                осереднення.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 20 -->
+            <h3 id="q-20">П20</h3>
+            <details class="answer" name="p2">
+              <summary>❌ Загальна ергодична теорема випадкових процесів.</summary>
+              <div></div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- 🍓 PART 3: 21-30 -->
+      <section id="part-3" class="lesson-wrapper tab-content">
+        <div class="lesson-block">
+          <div class="lesson-header">
+            <h2>
+              <img
+                src="./media/icons/strawberry.svg"
+                class="star"
+                alt="lemstrawberryon"
+                width="60"
+                height="60"
+              />
+              <span>Питання 21-30</span>
+            </h2>
+          </div>
+
+          <div class="lesson-content">
+            <!-- 21 -->
+            <h3 id="q-21">П21</h3>
+            <details class="answer" name="p3">
+              <summary>
+                Достатня умова виконання загальної ергодичної теореми випадкових
+                процесів.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 22 -->
+            <h3 id="q-22">П22</h3>
+            <details class="answer" name="p3">
+              <summary>
+                ❌ Однорідні ланцюги Маркова з дискретним часом: означення, основні
+                поняття, стаціонарні перехідні ймовірності, стохастичний вектор
+                та стохастична матриця, матричне та графічне зображення ланцюга.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 23 -->
+            <h3 id="q-23">П23</h3>
+            <details class="answer" name="p3">
+              <summary>
+                Типові приклади ланцюгів Маркова з дискретним часом.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 24 -->
+            <h3 id="q-24">П24</h3>
+            <details class="answer" name="p3">
+              <summary>
+                Ймовірність переходу системи зі стану в стан за n кроків.
+                Формула Колмогорова-Чепмена.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 25 -->
+            <h3 id="q-25">П25</h3>
+            <details class="answer" name="p3">
+              <summary>
+                Ймовірність перебування системи у заданому стані на n-му кроці.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 26 -->
+            <h3 id="q-26">П26</h3>
+            <details class="answer" name="p3">
+              <summary>
+                Стаціонарний розподіл ймовірностей для ергодичного ланцюга
+                Маркова.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 27 -->
+            <h3 id="q-27">П27</h3>
+            <details class="answer" name="p3">
+              <summary>
+                Марковські випадкові процеси з неперервним часом. Співвідношення
+                для перехідних ймовірностей процесу.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 28 -->
+            <h3 id="q-28">П28</h3>
+            <details class="answer" name="p3">
+              <summary>
+                Диф. р-ня для перехідних ймовірностей Марковського процесу.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 29 -->
+            <h3 id="q-29">П29</h3>
+            <details class="answer" name="p3">
+              <summary>
+                Процес Пуасона: опис, граф, математична модель. Розподіл
+                ймовірностей процесу. Розподіл часу між двома сусідніми
+                переходами.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 30 -->
+            <h3 id="q-30">П30</h3>
+            <details class="answer" name="p3">
+              <summary>Процеси розмноження та вимирання у загальному.</summary>
+              <div></div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- 🍉 PART 4: 31-40 -->
+      <section id="part-4" class="lesson-wrapper tab-content">
+        <div class="lesson-block">
+          <div class="lesson-header">
+            <h2>
+              <img
+                src="./media/icons/watermelon.svg"
+                class="star"
+                alt="watermelon"
+                width="60"
+                height="60"
+              />
+              <span>Питання 31-40</span>
+            </h2>
+          </div>
+
+          <div class="lesson-content">
+            <!-- 31 -->
+            <h3 id="q-31">П31</h3>
+            <details class="answer" name="p4">
+              <summary>
+                Чисте розмноження з незалежними від станів інтенсивностями.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 32 -->
+            <h3 id="q-32">П32</h3>
+            <details class="answer" name="p4">
+              <summary>
+                Чисте розмноження з незалежними від часу інтенсивностями.
+                Теорема Феллера.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 33 -->
+            <h3 id="q-33">П33</h3>
+            <details class="answer" name="p4">
+              <summary>
+                Чисте вимирання з незалежними від станів інтенсивностями.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 34 -->
+            <h3 id="q-34">П34</h3>
+            <details class="answer" name="p4">
+              <summary>
+                Чисте вимирання з незалежними від часу інтенсивностями.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 35 -->
+            <h3 id="q-35">П35</h3>
+            <details class="answer" name="p4">
+              <summary>
+                ВП в найпростішій системі масового обслуговування.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 36 -->
+            <h3 id="q-36">П36</h3>
+            <details class="answer" name="p4">
+              <summary>
+                Зображення ВП у вигляді суми та інтегралу елементарних
+                випадкових процесів. Канонічний розклад ВП.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 37 -->
+            <h3 id="q-37">П37</h3>
+            <details class="answer" name="p4">
+              <summary>
+                Знаходження координатних ф-й канонічного розкладу ВП у вигляді
+                суми елементарних випадкових процесів.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 38 -->
+            <h3 id="q-38">П38</h3>
+            <details class="answer" name="p4">
+              <summary>
+                Теорема про найкраще наближення центрованого ВП у вигляді суми
+                елементарних випадкових процесів.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 39 -->
+            <h3 id="q-39">П39</h3>
+            <details class="answer" name="p4">
+              <summary>
+                Знаходження коефіцієнтів канонічного розкладу ВП у вигляді суми
+                елементарних випадкових процесів.
+              </summary>
+              <div></div>
+            </details>
+
+            <hr />
+
+            <!-- 40 -->
+            <h3 id="q-40">П40</h3>
+            <details class="answer" name="p4">
+              <summary>
+                Теорема про точне відображення центрованого ВП у вигляді суми
+                елементарних випадкових процесів у дискретній множині значень
+                його аргументу.
+              </summary>
+              <div></div>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-credits">
+        <span
+          >Fruit icons by
+          <a
+            href="https://www.svgrepo.com/collection/fruits-vectors/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >An Nguyen</a
+          ></span
+        >
+        |
+        <a href="../credits.html" target="_blank">Credits & Licenses</a>
+      </div>
+    </footer>
+
+    <button
+      id="scrollToTopBtn"
+      class="scroll-to-top"
+      aria-label="Scroll to top"
+    >
+      <img src="../media/icons/apple.svg" />
+    </button>
+  </body>
+</html>
